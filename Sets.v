@@ -4,7 +4,7 @@ Require Export Peano_dec.
 Section U_SETS.
   Variable U : Set.
   Definition U_set := U -> Prop.
-  Axiom U_set_eq : forall E F : U_set, (forall x : U, E x = F x) -> E = F. (* functional extensionality *)
+  Axiom U_set_eq : forall E F : U_set, (forall x : U, E x <-> F x) -> E = F. (* functional extensionality *)
 
   Lemma U_eq_set : forall E F : U_set, E = F -> forall x : U, E x = F x.
   Proof.
@@ -72,10 +72,35 @@ Section U_SETS.
       intros. rewrite H. rewrite H0. reflexivity.
     Qed.
 
-    Lemma Union_neutral :
-      forall e : U_set, Union Empty e = e.
-    Proof.
-      intros. apply U_set_eq. intros x.
-      
+   Lemma Union_neutral : forall e : U_set, Union Empty e = e.
+   Proof.
+     intros. apply U_set_eq. intros x. split.
+     - intros H. destruct H. inversion H. assumption.
+     - intros H. apply In_right. assumption.
+   Qed.
+
+   Lemma Union_commut : forall e1 e2 : U_set, Union e1 e2 = Union e2 e1.
+   Proof.
+     intros e1 e2; apply U_set_eq; split; intros.
+     inversion H; [apply In_right | apply In_left]; trivial.
+     inversion H; [apply In_right | apply In_left]; trivial.
+   Qed.
+
+   Lemma Union_assoc : forall (e1 e2 e3 : U_set), Union (Union e1 e2) e3 = Union e1 (Union e2 e3).
+   Proof.
+     intros e1 e2 e3; apply U_set_eq; split; intros.
+     inversion H. inversion H0. apply In_left. trivial.
+     apply In_right. apply In_left. trivial.
+     apply In_right. apply In_right. trivial.
+     inversion H.
+     apply In_left. apply In_left. trivial.
+     inversion H0.
+     apply In_left. apply In_right. trivial.
+     apply In_right. trivial.
+   Qed.
+
+   Lemma Not_union :
+     forall (E1 E2 : U_set) (x : U), ~E1 x -> ~E2 x -> ~ (Union E1 E2 x).
+   Proof.
 
   End UNION.
