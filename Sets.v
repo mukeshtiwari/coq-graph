@@ -11,13 +11,13 @@ Section U_SETS.
     intros E F H x. rewrite H. reflexivity.
   Qed.
 
-  Lemma U_set_commute : forall E F : U_set, E = F -> F = E.
+  Lemma U_set_eq_commute : forall E F : U_set, E = F -> F = E.
   Proof. auto. Qed.
 
   Lemma U_set_diff_commute : forall E F : U_set, E <> F -> F <> E.
   Proof.
     intros E F. unfold not. intros H1 H2. apply H1.
-    apply U_set_commute. trivial.
+    apply U_set_eq_commute. trivial.
   Qed.
 
   Inductive Empty : U_set :=.
@@ -218,7 +218,7 @@ Section U_SETS.
     Inductive Differ (E F : U_set) : U_set :=
       In_differ : forall x : U, E x -> ~ F x -> Differ E F x.
 
-    Lemma Differ_E_F :
+    Lemma Differ_E_E :
       forall E : U_set, Differ E E = Empty.
     Proof.
       intros; apply U_set_eq; split; intros.

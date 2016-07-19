@@ -23,13 +23,13 @@ Section VERTEX.
   Definition V_set_eq := U_set_eq Vertex.
   Definition V_set_diff := U_set_diff Vertex.
   Definition V_eq_set := U_eq_set Vertex.
-  Definition V_set_eq_commut := U_set_eq_commut Vertex.
+  Definition V_set_eq_commut := U_set_eq_commute Vertex.
   Definition V_set_diff_commut := U_set_diff_commute Vertex.
   Definition V_empty := Empty Vertex.
   Definition V_empty_nothing := Empty_nothing Vertex.
   Definition V_single := Single Vertex.
   Definition V_in_single := In_single Vertex.
-  Definition V_single_equal := Single_equal Vertex.
+  Definition V_single_equal := single_equal Vertex.
   Definition V_single_equal_single := Single_equal_single Vertex.
   Definition V_included := Included Vertex.
   Definition V_included_single := Included_single Vertex.
@@ -51,7 +51,7 @@ Section VERTEX.
   Definition V_inter_eq := Inter_eq Vertex.
   Definition V_inter_neutral := Inter_neutral Vertex.
   Definition V_inter_empty := Inter_empty Vertex.
-  Definition V_inter_commut := Inter_commut Vertex.
+  Definition V_inter_commut := Inter_commute Vertex.
   Definition V_inter_assoc := Inter_assoc Vertex.
   Definition V_not_inter := Not_inter Vertex.
   Definition V_included_inter := Included_inter Vertex.
